@@ -1,0 +1,65 @@
+# Системные файлы macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Иконки Thumbs.db (Windows)
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Кэш и временные файлы IDE
+*.swp
+*.swo
+*.tmp
+
+# Xcode
+## Проекты и рабочие области
+xcuserdata/
+*.xcuserstate
+*.xccheckout
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/xcshareddata/**/*
+*.xcworkspace/
+!*.xcworkspace/contents.xcworkspacedata
+
+## Логи и отчёты
+*.log
+*.xcactivitylog
+
+## Деплой и временные файлы
+DerivedData/
+Build/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Профили подписей
+*.mobileprovision
+*.provisionprofile
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/Build/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output/
+
+# Виртуальные окружения
+.vscode/
+.idea/
+
+# Git-файлы
+.git/
+.gitignore~
