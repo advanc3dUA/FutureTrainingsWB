@@ -27,17 +27,18 @@ struct ContentView: View {
             .toolbar (content: {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        print("")
+                        isShowingProperties = true
                     } label: {
-                        Image(systemName: "")
+                        Image(systemName: "slider.horizontal.3")
+                    }//: BUTTON
+                    .sheet(isPresented: $isShowingProperties) {
+                        SettingsView()
                     }
-
                 }
             })
         }//: NAVIGATION
-        .sheet(isPresented: $isShowingProperties) {
-            SettingsView()
-        }
+        .navigationViewStyle(StackNavigationViewStyle())
+        
     }
 }
 
