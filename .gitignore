@@ -63,3 +63,6 @@ fastlane/test_output/
 # Git-файлы
 .git/
 .gitignore~
+
+# Videos
+*.mp4
