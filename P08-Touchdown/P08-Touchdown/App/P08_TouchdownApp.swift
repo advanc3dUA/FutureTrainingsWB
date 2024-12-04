@@ -12,6 +12,7 @@ struct P08_TouchdownApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(Shop())
         }
     }
 }

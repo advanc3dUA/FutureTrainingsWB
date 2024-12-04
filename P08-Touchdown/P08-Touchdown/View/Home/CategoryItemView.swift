@@ -27,6 +27,7 @@ struct CategoryItemView: View {
                 
                 Spacer()
             } //: HSTACK
+            .padding(10)
             .background(
                 ZStack {
                     Color.white.cornerRadius(12)
