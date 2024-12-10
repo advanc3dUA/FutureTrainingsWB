@@ -106,6 +106,42 @@ struct ContentView: View {
                 //MARK: - FOOTER
                 
                 Spacer()
+                
+                HStack {
+                    //MARK: - BET 20
+                    HStack(alignment: .center, spacing: 10) {
+                        Button {
+                            print("bet")
+                        } label: {
+                            Text("20")
+                                .foregroundStyle(.white)
+                                .betNumberModifier()
+                        }
+                        .betCapsuleModifier()
+                        
+                        Image("gfx-casino-chips")
+                            .resizable()
+                            .opacity(0)
+                            .casinoChipsModifier()
+                    }
+                    
+                    //MARK: - BET 10
+                    HStack(alignment: .center, spacing: 10) {
+                        Image("gfx-casino-chips")
+                            .resizable()
+                            .opacity(1)
+                            .casinoChipsModifier()
+                        Button {
+                            print("bet")
+                        } label: {
+                            Text("10")
+                                .foregroundStyle(.colorYellow)
+                                .betNumberModifier()
+                        }
+                        .betCapsuleModifier()
+                        
+                    }
+                }
             }
             //MARK: - BUTTONS
             .overlay(
