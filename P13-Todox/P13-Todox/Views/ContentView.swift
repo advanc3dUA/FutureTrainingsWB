@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(entity: Todo.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Todo.name, ascending: true)]) var fetchedTodos: FetchedResults<Todo>
+    @State private var isAnimatingButton = false
     
     private func deleteToDo(in indexSet: IndexSet) {
         indexSet.forEach { index in
@@ -44,6 +45,9 @@ struct ContentView: View {
                         } label: {
                             Image(systemName: "plus")
                         }
+                        .sheet(isPresented: $isShowingAddToDoView) {
+                            AddToDoView()
+                        }
                     }
                 } //: TOOLBAR
                 
@@ -52,6 +56,44 @@ struct ContentView: View {
                     EmptyListView()
                 }
             } //: ZSTACK
+//            .sheet(isPresented: $isShowingAddToDoView) {
+//                AddToDoView()
+//            }
+            .overlay(
+                ZStack {
+                    Group {
+                        Circle()
+                            .fill(.blue)
+                            .opacity(isAnimatingButton ? 0.2 : 0)
+                            .scaleEffect(isAnimatingButton ? 1 : 0)
+                            .frame(width: 68, height: 68, alignment: .center)
+                        
+                        Circle()
+                            .fill(.blue)
+                            .opacity(isAnimatingButton ? 0.15 : 0)
+                            .scaleEffect(isAnimatingButton ? 1 : 0)
+                            .frame(width: 88, height: 88, alignment: .center)
+                    }
+                    Button {
+                        isShowingAddToDoView.toggle()
+                    } label: {
+                        Image(systemName: "plus.circle.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .background(Circle().fill(Color("ColorBase")))
+                            .frame(width: 48, height: 48, alignment: .center)
+                    } //: BUTTON
+                    .onAppear {
+                        withAnimation(.easeInOut(duration: 2).repeatForever(autoreverses: true)) {
+                            isAnimatingButton.toggle()
+                        }
+                    }
+                    
+                } //: ZSTACK
+                    .padding(.trailing, 15)
+                    .padding(.bottom, 15)
+                , alignment: .bottomTrailing
+            )
         } //: NAVIGATION
         .sheet(isPresented: $isShowingAddToDoView) {
             AddToDoView()

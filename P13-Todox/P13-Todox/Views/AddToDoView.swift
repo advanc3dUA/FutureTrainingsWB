@@ -22,8 +22,12 @@ struct AddToDoView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Form {
+                VStack(alignment: .leading, spacing: 20) {
                     TextField("Todo", text: $name)
+                        .padding()
+                        .background(Color(UIColor.tertiarySystemFill))
+                        .cornerRadius(8)
+                        .font(.system(size: 24, weight: .bold, design: .default))
                     
                     Picker(selection: $priority) {
                         ForEach(priopities, id: \.self) { priority in
@@ -50,9 +54,19 @@ struct AddToDoView: View {
                         dismiss()
                     } label: {
                         Text("Save")
+                            .font(.system(size: 24, weight: .bold, design: .default))
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.blue)
+                            .cornerRadius(8)
+                            .foregroundStyle(.white)
                     }
 
-                } //: FORM
+                } //: VSTACK
+                .padding(.horizontal)
+                .padding(.vertical, 20)
+                
+                Spacer()
             } //: VSTACK
             .navigationTitle("New Todo")
             .navigationBarTitleDisplayMode(.inline)
