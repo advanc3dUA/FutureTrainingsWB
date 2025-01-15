@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SignupFormModelValidator {
+class SignupFormModelValidator: SignupModelValdiatorProtocol {
     func isFirstNameValid(firstName: String) -> Bool {
         firstName.count < SignupConstants.firstNameMinimumLength || firstName.count > SignupConstants.firstNameMaximumLength ? false : true
     }
