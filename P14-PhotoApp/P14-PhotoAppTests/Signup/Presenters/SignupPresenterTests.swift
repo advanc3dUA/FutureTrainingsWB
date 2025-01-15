@@ -9,13 +9,36 @@ import XCTest
 @testable import P14_PhotoApp
 
 final class SignupPresenterTests: XCTestCase {
+    var signupFormModel: SignupFormModel!
+    var mockSignupModelValidator: MockSignupModelValidator!
+    var mockSignupWebSerice: MockSignupWebService!
+    var mockSignupViewDelegate: MockSignupViewDelegate!
+    var sut: SignupPresenter!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        signupFormModel = SignupFormModel(firstName: "Yuriy",
+                                              lastName: "Ivanov",
+                                              email: "hello@hello.de",
+                                              password: "12345678",
+                                              repeatPassword: "12345678"
+        )
+        mockSignupModelValidator = MockSignupModelValidator()
+        mockSignupWebSerice = MockSignupWebService()
+        mockSignupViewDelegate = MockSignupViewDelegate()
+        sut = SignupPresenter(formModelValidator: mockSignupModelValidator,
+                              webService: mockSignupWebSerice,
+                              delegate: mockSignupViewDelegate
+        )
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        signupFormModel = nil
+        mockSignupModelValidator = nil
+        mockSignupWebSerice = nil
+        sut = nil
+        mockSignupViewDelegate = nil
     }
 
     func testExample() throws {
@@ -35,14 +58,6 @@ final class SignupPresenterTests: XCTestCase {
     
     func testSignupPresenter_WhenInformationProvided_WillValidateEachProperty() {
         // Arrange
-        let signupFormModel = SignupFormModel(firstName: "Yuriy",
-                                              lastName: "Ivanov",
-                                              email: "hello@hello.de",
-                                              password: "12345678",
-                                              repeatPassword: "12345678"
-        )
-        let mockSignupModelValidator = MockSignupModelValidator()
-        let sut = SignupPresenter(formModelValidator: mockSignupModelValidator)
         
         // Act
         sut.proccessUserSignup(formModel: signupFormModel)
@@ -55,4 +70,42 @@ final class SignupPresenterTests: XCTestCase {
         XCTAssertTrue(mockSignupModelValidator.isRepeatPasswordValidated, "Passwords doesn't match")
     }
 
+    func testSignupPresenter_WhenGivenValidForModel_ShouldCallSignupMethod() {
+        // Arrange
+        
+        // Act
+        sut.proccessUserSignup(formModel: signupFormModel)
+        
+        // Assert
+        XCTAssertTrue(mockSignupWebSerice.isSignupMethodCalled, "The signup() method wasn't called in the SignupWebService class")
+    }
+    
+    func testSignupPresenter_WhenSignupOperationSuccessfull_CallsSuccessOnViewDelegate() {
+        // Arrange
+        let myExpectation = expectation(description: "Expected successfullSignup() method to be called")
+        mockSignupViewDelegate.expectation = myExpectation
+        
+        // Act
+        sut.proccessUserSignup(formModel: signupFormModel)
+        self.wait(for: [myExpectation], timeout: 5)
+        
+        // Assert
+        XCTAssertEqual(mockSignupViewDelegate.successfullSignupCounter, 1, "The successfullSignup() method was called more than once")
+    }
+    
+    func testSignupPresenter_WhenSignupOperationFails_ShouldCallErrorOnDelegate() {
+        // Arrange
+        let errorHandlerExpecation = expectation(description: "Expected errorSignup() method to be called")
+        mockSignupViewDelegate.expectation = errorHandlerExpecation
+        mockSignupWebSerice.shouldReturnError = true
+        
+        // Act
+        sut.proccessUserSignup(formModel: signupFormModel)
+        self.wait(for: [errorHandlerExpecation], timeout: 5)
+        
+        // Assert
+        XCTAssertEqual(mockSignupViewDelegate.successfullSignupCounter, 0)
+        XCTAssertEqual(mockSignupViewDelegate.errorHandlerCounter, 1)
+        XCTAssertNotNil(mockSignupViewDelegate.signupError)
+    }
 }
