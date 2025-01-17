@@ -37,6 +37,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="Qcr-M7-MHQ"/>
+                    <connections>
+                        <outlet property="nextViewButton" destination="9dv-d5-4Fb" id="hHX-fC-rjV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
