@@ -14,11 +14,19 @@
 			remoteGlobalIDString = BFAD3EF22D140A8600997E45;
 			remoteInfo = "P14-PhotoApp";
 		};
+		BFC5169B2D3F96AC001FCD14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFAD3EEB2D140A8600997E45 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFAD3EF22D140A8600997E45;
+			remoteInfo = "P14-PhotoApp";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		BFAD3EF32D140A8600997E45 /* P14-PhotoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "P14-PhotoApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFAD3F082D140ABA00997E45 /* P14-PhotoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "P14-PhotoAppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFC516952D3F96AC001FCD14 /* P14-PhotoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "P14-PhotoAppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -30,6 +38,11 @@
 		BFAD3F092D140ABA00997E45 /* P14-PhotoAppTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "P14-PhotoAppTests";
+			sourceTree = "<group>";
+		};
+		BFC516962D3F96AC001FCD14 /* P14-PhotoAppUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "P14-PhotoAppUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -49,6 +62,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFC516922D3F96AC001FCD14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -57,6 +77,7 @@
 			children = (
 				BFAD3EF52D140A8600997E45 /* P14-PhotoApp */,
 				BFAD3F092D140ABA00997E45 /* P14-PhotoAppTests */,
+				BFC516962D3F96AC001FCD14 /* P14-PhotoAppUITests */,
 				BFAD3EF42D140A8600997E45 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,6 +87,7 @@
 			children = (
 				BFAD3EF32D140A8600997E45 /* P14-PhotoApp.app */,
 				BFAD3F082D140ABA00997E45 /* P14-PhotoAppTests.xctest */,
+				BFC516952D3F96AC001FCD14 /* P14-PhotoAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,6 +140,29 @@
 			productReference = BFAD3F082D140ABA00997E45 /* P14-PhotoAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		BFC516942D3F96AC001FCD14 /* P14-PhotoAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFC5169F2D3F96AC001FCD14 /* Build configuration list for PBXNativeTarget "P14-PhotoAppUITests" */;
+			buildPhases = (
+				BFC516912D3F96AC001FCD14 /* Sources */,
+				BFC516922D3F96AC001FCD14 /* Frameworks */,
+				BFC516932D3F96AC001FCD14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BFC5169C2D3F96AC001FCD14 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				BFC516962D3F96AC001FCD14 /* P14-PhotoAppUITests */,
+			);
+			name = "P14-PhotoAppUITests";
+			packageProductDependencies = (
+			);
+			productName = "P14-PhotoAppUITests";
+			productReference = BFC516952D3F96AC001FCD14 /* P14-PhotoAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -134,6 +179,10 @@
 					BFAD3F072D140ABA00997E45 = {
 						CreatedOnToolsVersion = 16.2;
 						LastSwiftMigration = 1620;
+						TestTargetID = BFAD3EF22D140A8600997E45;
+					};
+					BFC516942D3F96AC001FCD14 = {
+						CreatedOnToolsVersion = 16.2;
 						TestTargetID = BFAD3EF22D140A8600997E45;
 					};
 				};
@@ -154,6 +203,7 @@
 			targets = (
 				BFAD3EF22D140A8600997E45 /* P14-PhotoApp */,
 				BFAD3F072D140ABA00997E45 /* P14-PhotoAppTests */,
+				BFC516942D3F96AC001FCD14 /* P14-PhotoAppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -167,6 +217,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BFAD3F062D140ABA00997E45 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFC516932D3F96AC001FCD14 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -190,6 +247,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFC516912D3F96AC001FCD14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -197,6 +261,11 @@
 			isa = PBXTargetDependency;
 			target = BFAD3EF22D140A8600997E45 /* P14-PhotoApp */;
 			targetProxy = BFAD3F0C2D140ABA00997E45 /* PBXContainerItemProxy */;
+		};
+		BFC5169C2D3F96AC001FCD14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFAD3EF22D140A8600997E45 /* P14-PhotoApp */;
+			targetProxy = BFC5169B2D3F96AC001FCD14 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -417,6 +486,40 @@
 			};
 			name = Release;
 		};
+		BFC5169D2D3F96AC001FCD14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8YW779MG62;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.advanc3d.P14-PhotoAppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "P14-PhotoApp";
+			};
+			name = Debug;
+		};
+		BFC5169E2D3F96AC001FCD14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8YW779MG62;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.advanc3d.P14-PhotoAppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "P14-PhotoApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -443,6 +546,15 @@
 			buildConfigurations = (
 				BFAD3F0F2D140ABA00997E45 /* Debug */,
 				BFAD3F102D140ABA00997E45 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFC5169F2D3F96AC001FCD14 /* Build configuration list for PBXNativeTarget "P14-PhotoAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFC5169D2D3F96AC001FCD14 /* Debug */,
+				BFC5169E2D3F96AC001FCD14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
