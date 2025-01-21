@@ -28,12 +28,12 @@ final class SignupFlowUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
-        let firstNameTextField = app.textFields["First name"]
-        let familyNametextField = app.textFields["Family name"]
-        let emailTextField = app.textFields["Email address"]
-        let passwordTextField = app.secureTextFields["Password"]
-        let repeatPasswordTextField = app.secureTextFields["Repeat password"]
-        let signupButton = app.buttons["Signup"]
+        let firstNameTextField = app.textFields["firstNameTextField"]
+        let familyNametextField = app.textFields["familyNameTextField"]
+        let emailTextField = app.textFields["emailTextField"]
+        let passwordTextField = app.secureTextFields["passwordTextField"]
+        let repeatPasswordTextField = app.secureTextFields["repeatPasswordTextField"]
+        let signupButton = app.buttons["signupButton"]
         
         XCTAssertTrue(firstNameTextField.isEnabled, "First name UITextField is not enabled")
         XCTAssertTrue(familyNametextField.isEnabled, "Family name UITextField is not enabled")
@@ -41,11 +41,31 @@ final class SignupFlowUITests: XCTestCase {
         XCTAssertTrue(passwordTextField.isEnabled, "Password UITextField is not enabled")
         XCTAssertTrue(repeatPasswordTextField.isEnabled, "Repeat password UITextField is not enabled")
         XCTAssertTrue(signupButton.isEnabled, "Signup UIButton UITextField is not enabled")
-                
-                
-                        
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    
+    func testSignupViewController_WhenInvalidFormSubmitted_PresentsErrorAlertDialog() {
+        let app = XCUIApplication()
+        app.launch()
+        
+        let firstNameTextField = app.textFields["firstNameTextField"]
+        firstNameTextField.tap()
+        firstNameTextField.typeText("Y")
+        let familyNametextField = app.textFields["familyNameTextField"]
+        familyNametextField.tap()
+        familyNametextField.typeText("G")
+        let emailTextField = app.textFields["emailTextField"]
+        emailTextField.tap()
+        emailTextField.typeText("@")
+        let passwordTextField = app.secureTextFields["passwordTextField"]
+        passwordTextField.tap()
+        passwordTextField.typeText("12345678")
+        let repeatPasswordTextField = app.secureTextFields["repeatPasswordTextField"]
+        repeatPasswordTextField.tap()
+        repeatPasswordTextField.typeText("123456")
+        let signupButton = app.buttons["signupButton"]
+        signupButton.tap()
+        
+        XCTAssertTrue(app.alerts["errorAlertDialog"].waitForExistence(timeout: 1), "An error alert wasn't presented")
     }
 
     @MainActor
