@@ -34,9 +34,11 @@ class SignupPresenter: SignupPresenterProtocol {
             return
         }
         
-        if !formModelValidator.isPasswordValid(password: formModel.password) {
-            delegate?.errorHandler(error: SignupError.invalidPassword)
-            return
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            if !self.formModelValidator.isPasswordValid(password: formModel.password) {
+                self.delegate?.errorHandler(error: SignupError.invalidPassword)
+                return
+            }
         }
         
         if !formModelValidator.doPasswordsMatch(password: formModel.password, repeatPassword: formModel.repeatPassword) {

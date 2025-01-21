@@ -39,7 +39,13 @@ class SignupViewController: UIViewController {
 
 extension SignupViewController: SignupViewDelegateProtocol {
     func successfullSignup() {
-        // TODO
+        let alert = UIAlertController(title: "Success", message: "The data is correct", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        
+        DispatchQueue.main.async {
+            alert.view.accessibilityIdentifier = "successAlertDialog"
+            self.present(alert, animated: true)
+        }
     }
     
     func errorHandler(error: SignupError) {
