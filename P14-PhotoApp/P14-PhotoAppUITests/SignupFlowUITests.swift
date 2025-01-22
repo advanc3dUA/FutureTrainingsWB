@@ -19,6 +19,11 @@ final class SignupFlowUITests: XCTestCase {
     override func setUpWithError() throws {
         app = XCUIApplication()
         app.launchArguments = ["-skipSurvey"]
+//        app.launchEnvironment = ["signupUrl": "https://somenewurl.com"]
+        let signupUrl = ProcessInfo.processInfo.environment["signupUrl"]
+            if let signupUrl = signupUrl {
+                app.launchEnvironment["signupUrl"] = signupUrl
+            }
         app.launch()
 
         firstNameTextField = app.textFields["firstNameTextField"]

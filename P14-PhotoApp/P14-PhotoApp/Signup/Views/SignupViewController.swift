@@ -33,9 +33,11 @@ class SignupViewController: UIViewController {
         }
         #endif
         
+        let signupURL = ProcessInfo.processInfo.environment["signupUrl"] ?? SignupConstants.signupURL
+        
         if signupPresenter == nil {
             let signupModelValidator = SignupFormModelValidator()
-            let webService = SignupWebService(urlString: SignupConstants.signupURL)
+            let webService = SignupWebService(urlString: signupURL)
             signupPresenter = SignupPresenter(formModelValidator: signupModelValidator, webService: webService, delegate: self)
         }
     }

@@ -1,0 +1,46 @@
+{
+  "configurations" : [
+    {
+      "id" : "04D97E0D-8742-4089-8FF1-1864D7C36385",
+      "name" : "Test Server 1 URL",
+      "options" : {
+        "commandLineArgumentEntries" : [
+
+        ],
+        "environmentVariableEntries" : [
+          {
+            "key" : "signupUrl",
+            "value" : "https:\/\/urlfromconfiguration.one"
+          }
+        ],
+        "uiTestingScreenshotsLifetime" : "deleteOnSuccess"
+      }
+    },
+    {
+      "id" : "5A30CCF5-D755-4B6B-BD72-BC0515C3E9B9",
+      "name" : "Test Server 2 URL",
+      "options" : {
+        "environmentVariableEntries" : [
+          {
+            "key" : "signupUrl",
+            "value" : "https:\/\/anotherurlfromconfiguration.two"
+          }
+        ]
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true,
+    "uiTestingScreenshotsLifetime" : "keepNever"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:P14-PhotoApp.xcodeproj",
+        "identifier" : "BFC516942D3F96AC001FCD14",
+        "name" : "P14-PhotoAppUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
