@@ -18,6 +18,7 @@ final class SignupFlowUITests: XCTestCase {
 
     override func setUpWithError() throws {
         app = XCUIApplication()
+        app.launchArguments = ["-skipSurvey"]
         app.launch()
 
         firstNameTextField = app.textFields["firstNameTextField"]
