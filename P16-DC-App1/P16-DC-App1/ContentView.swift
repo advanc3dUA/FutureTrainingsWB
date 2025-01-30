@@ -60,6 +60,7 @@ struct ContentView: View {
                     }
                     .padding()
                     .frame(height: 44)
+                    .modifier(UnevenRoundedRectGradientOverlayModifer())
                     .offset(x: -20, y: 20)
                     
                     Spacer()
@@ -67,15 +68,18 @@ struct ContentView: View {
                     Image(systemName: "square.and.arrow.down")
                         .padding()
                         .frame(height: 44)
+                        .modifier(UnevenInvertedRoundedRectOverlayModifier())
                         .offset(x: 20, y: 20)
                 }
                 
             }
             .padding(20)
             .background(.ultraThinMaterial)
+            .modifier(RoundedRectGradientOverlayModifer())
             .clipShape(.rect(cornerRadius: 20))
             .padding(20)
             .offset(y: 80)
+            
         }
         .frame(maxWidth: 400)
         .padding(20)
