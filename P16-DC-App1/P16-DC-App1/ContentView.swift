@@ -9,44 +9,77 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack(alignment: .center) {
-            Image(systemName: "sparkles")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("modern architecture, an isometric tiny house, cute illustration, minimalist, vector art, night view")
-                .font(.subheadline)
-            HStack(spacing: 12) {
-                VStack(alignment: .leading) {
-                    Text("Size")
-                        .foregroundStyle(.secondary)
-                    Text("1024x1024")
+        ZStack {
+            Image(.image1)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(height: 300)
+                .clipShape(.rect(cornerRadius: 20))
+            
+            VStack(alignment: .center) {
+                Text("modern architecture, an isometric tiny house, cute illustration, minimalist, vector art, night view")
+                    .font(.subheadline)
+                HStack(spacing: 8) {
+                    VStack(alignment: .leading) {
+                        Text("Size")
+                            .foregroundStyle(.secondary)
+                        Text("1024x1024")
+                    }
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    
+                    Divider()
+                    
+                    VStack(alignment: .leading) {
+                        Text("Type")
+                            .foregroundStyle(.secondary)
+                        Text("Upscale")
+                    }
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    
+                    Divider()
+                    
+                    VStack(alignment: .leading) {
+                        Text("Date")
+                            .foregroundStyle(.secondary)
+                        Text("Today 5:19")
+                    }
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
                 }
-                .font(.subheadline)
-                .fontWeight(.semibold)
+                .frame(height: 44)
                 
-                Divider()
-                
-                VStack(alignment: .leading) {
-                    Text("Type")
-                        .foregroundStyle(.secondary)
-                    Text("Upscale")
+                HStack {
+                    HStack {
+                        Image(systemName: "ellipsis")
+                        Divider()
+                        Image(systemName: "sparkle.magnifyingglass")
+                        Divider()
+                        Image(systemName: "face.smiling")
+                    }
+                    .padding()
+                    .frame(height: 44)
+                    .offset(x: -20, y: 20)
+                    
+                    Spacer()
+                    
+                    Image(systemName: "square.and.arrow.down")
+                        .padding()
+                        .frame(height: 44)
+                        .offset(x: 20, y: 20)
                 }
-                .font(.subheadline)
-                .fontWeight(.semibold)
                 
-                Divider()
-                
-                VStack(alignment: .leading) {
-                    Text("Date")
-                        .foregroundStyle(.secondary)
-                    Text("Today 5:19")
-                }
-                .font(.subheadline)
-                .fontWeight(.semibold)
             }
-            .frame(height: 44)
+            .padding(20)
+            .background(.ultraThinMaterial)
+            .clipShape(.rect(cornerRadius: 20))
+            .padding(20)
+            .offset(y: 80)
         }
-        .padding()
+        .frame(maxWidth: 400)
+        .padding(20)
+        .dynamicTypeSize(.xSmall ... .xLarge)
     }
 }
 
