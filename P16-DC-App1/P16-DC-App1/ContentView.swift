@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var isActive = false
     @State private var isDownloading = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    private let startDate = Date()
     
     struct AnimationValues {
         var position: CGPoint = CGPoint(x: 0, y: 0)
@@ -20,75 +21,98 @@ struct ContentView: View {
     }
     
     var body: some View {
-        ZStack {
-            Image(.image1)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: isTapped ? 393 : 360, height: isTapped ? 600 : 300)
-                .clipShape(.rect(cornerRadius: isTapped ? 0 : 20))
-                .modifier(RoundedRectGradientOverlayModifer())
-                .offset(y: isTapped ? -200 : 0)
-                .phaseAnimator([1, 2], trigger: isTapped, content: { content, phase in
-                    // in this case we using phase's numbers
-                    content.blur(radius: phase == 2 ? 200 : 0)
-                    }
-                )
-
-            Circle()
-                .fill(.thinMaterial)
-                .frame(width: 100)
-                .overlay(
-                    Circle().stroke(.secondary)
-                )
-                .overlay(
-                    Image(systemName: "photo")
-                        .font(.largeTitle)
-                )
-                .keyframeAnimator(initialValue: AnimationValues(), trigger: isDownloading) { content, keyFrame in
-                    content
-                        .offset(x: keyFrame.position.x, y: keyFrame.position.y)
-                        .scaleEffect(keyFrame.scale)
-                } keyframes: { value in
-                    KeyframeTrack(\.position) {
-                        SpringKeyframe(CGPoint(x: 100, y: -100), duration: 0.5, spring: .bouncy)
-                        CubicKeyframe(CGPoint(x: 400, y: 1000), duration: 0.5)
-                    }
-                    KeyframeTrack(\.scale) {
-                        CubicKeyframe(1.2, duration: 0.5)
-                        CubicKeyframe(1.0, duration: 0.5)
-                    }
+        TimelineView(.animation) { context in
+            ZStack {
+                TimelineView(.animation) { context in
+                    Image(.image1)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: isTapped ? 393 : 360, height: isTapped ? 600 : 300)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .colorEffect(
+                                    ShaderLibrary.noise(
+                                        .float(startDate.timeIntervalSinceNow)
+                                    )
+                                )
+                                .blendMode(.softLight)
+                        )
+                        .layerEffect(ShaderLibrary.emboss(.float(1)), maxSampleOffset: .zero)
+                        .layerEffect(ShaderLibrary.pixellate(.float(1)), maxSampleOffset: .zero)
+                        .clipShape(.rect(cornerRadius: isTapped ? 0 : 20))
+                        .modifier(RoundedRectGradientOverlayModifer())
+                        .offset(y: isTapped ? -200 : 0)
+                        .phaseAnimator([1, 2], trigger: isTapped, content: { content, phase in
+                            // in this case we using phase's numbers
+                            content.blur(radius: phase == 2 ? 200 : 0)
+                        }
+                        )
                 }
-
-            
-            content
-            .padding(20)
-            .background(.ultraThinMaterial)
-            .modifier(RoundedRectGradientOverlayModifer())
-            .clipShape(.rect(cornerRadius: 20))
-            .padding(40)
-            .offset(y: isTapped ? 220 : 80)
-//            .phaseAnimator([1, 1.1, 1.2]) { content, phase in
-//                content.scaleEffect(phase)
-//            } animation: { phase in
-//                switch phase {
-//                case 1: .bouncy
-//                case 1.1: .snappy
-//                default: .bouncy
-//                }
-//            }
-            
-            play
-            .frame(width: isTapped ? 220 : 50)
-            .foregroundStyle(.primary, .white)
-            .font(.largeTitle)
-            .padding(20)
-            .background(.ultraThinMaterial)
-            .modifier(RoundedRectGradientOverlayModifer())
-            .clipShape(.rect(cornerRadius: 20))
-            .offset(y: isTapped ? 40 : -44)
+                
+                Circle()
+                    .fill(.thinMaterial)
+                    .frame(width: 100)
+                    .overlay(
+                        Circle().stroke(.secondary)
+                    )
+                    .overlay(
+                        Image(systemName: "photo")
+                            .font(.largeTitle)
+                    )
+                    .keyframeAnimator(initialValue: AnimationValues(), trigger: isDownloading) { content, keyFrame in
+                        content
+                            .offset(x: keyFrame.position.x, y: keyFrame.position.y)
+                            .scaleEffect(keyFrame.scale)
+                    } keyframes: { value in
+                        KeyframeTrack(\.position) {
+                            SpringKeyframe(CGPoint(x: 100, y: -100), duration: 0.5, spring: .bouncy)
+                            CubicKeyframe(CGPoint(x: 400, y: 1000), duration: 0.5)
+                        }
+                        KeyframeTrack(\.scale) {
+                            CubicKeyframe(1.2, duration: 0.5)
+                            CubicKeyframe(1.0, duration: 0.5)
+                        }
+                    }
+                
+                
+                content
+                    .padding(20)
+                    .background(.ultraThinMaterial)
+                    .modifier(RoundedRectGradientOverlayModifer())
+                    .clipShape(.rect(cornerRadius: 20))
+                    .padding(40)
+                    .offset(y: isTapped ? 220 : 80)
+                //            .phaseAnimator([1, 1.1, 1.2]) { content, phase in
+                //                content.scaleEffect(phase)
+                //            } animation: { phase in
+                //                switch phase {
+                //                case 1: .bouncy
+                //                case 1.1: .snappy
+                //                default: .bouncy
+                //                }
+                //            }
+                
+                play
+                    .frame(width: isTapped ? 220 : 50)
+                    .foregroundStyle(
+                        ShaderLibrary.angledFill(
+                            .float(10),
+                            .float(10),
+                            .color(.blue)
+                        )
+                    )
+                    .foregroundStyle(.primary, .white)
+                    .font(.largeTitle)
+                    .padding(20)
+                    .background(.ultraThinMaterial)
+                    .modifier(RoundedRectGradientOverlayModifer())
+                    .clipShape(.rect(cornerRadius: 20))
+                    .offset(y: isTapped ? 40 : -44)
+            }
+            .frame(maxWidth: 400)
+            .dynamicTypeSize(.xSmall ... .xLarge)
+            .distortionEffect(ShaderLibrary.simpleWave(.float(startDate.timeIntervalSinceNow)), maxSampleOffset: CGSize(width: 100, height: 100), isEnabled: false)
         }
-        .frame(maxWidth: 400)
-        .dynamicTypeSize(.xSmall ... .xLarge)
     }
     
     var content: some View {
