@@ -62,7 +62,7 @@ struct CardView: View {
                 card.image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: isTapped ? 393 : 360, height: isTapped ? 600 : 300)
+                    .frame(width: isTapped ? 393 : 360, height: isTapped ? 600 : 500)
                     .if(hasPattern, transform: { view in
                         view
                             .colorEffect(ShaderLibrary.circleLoader(.boundingRect, .float(startDate.timeIntervalSinceNow)), isEnabled: hasPattern)
