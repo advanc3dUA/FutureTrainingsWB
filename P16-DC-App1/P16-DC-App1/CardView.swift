@@ -94,12 +94,21 @@ struct CardView: View {
                         if number >= 10 { isIncrementing = false }
                         if number <= 0 { isIncrementing = true }
                     })
-                    .clipShape(.rect(cornerRadius: isTapped ? 0 : 20))
+                    .overlay (
+                        Text(card.title)
+                            .font(.system(size: isTapped ? 80 : 17))
+                            .foregroundStyle(.white)
+                            .fontWeight(isTapped ? .heavy : .semibold)
+                            .padding()
+                            .shadow(color: .black, radius: isTapped ? 100 : 10, y: 10)
+                            .frame(maxHeight: .infinity, alignment: isTapped ? .center : .top)
+                    )
+                    .clipShape(.rect(cornerRadius: isTapped ? 40 : 20))
                     .modifier(RoundedRectGradientOverlayModifer())
                     .offset(y: isTapped ? -200 : 0)
                     .phaseAnimator([1, 2], trigger: isTapped, content: { content, phase in
                         // in this case we using phase's numbers
-                        content.blur(radius: phase == 2 ? 200 : 0)
+                        content.scaleEffect(phase == 2 ? 1.1 : 1)
                     })
                     .onTapGesture {
                         hasNoise.toggle()
