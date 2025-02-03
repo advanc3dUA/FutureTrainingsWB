@@ -20,6 +20,9 @@ struct ContentView: View {
     @State private var isPixellated = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     private let startDate = Date()
+    @State private var number: Float = 0
+    let numberTimer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    @State private var isIncrementing = true
     
     struct AnimationValues {
         var position: CGPoint = CGPoint(x: 0, y: 0)
@@ -62,8 +65,14 @@ struct ContentView: View {
                             )
                             .blendMode(.overlay)
                     )
-                    .layerEffect(ShaderLibrary.emboss(.float(1)), maxSampleOffset: .zero, isEnabled: hasEmboss)
-                    .layerEffect(ShaderLibrary.pixellate(.float(10)), maxSampleOffset: .zero, isEnabled: isPixellated)
+                    .layerEffect(ShaderLibrary.emboss(.float(number)), maxSampleOffset: .zero, isEnabled: hasEmboss)
+                    .layerEffect(ShaderLibrary.pixellate(.float(number)), maxSampleOffset: .zero, isEnabled: isPixellated)
+                    .onReceive(numberTimer, perform: { _ in
+//                        isIncrementing ? (number += 0.1) : (number -= 0.1)
+                        number += isIncrementing ? 0.1 : -0.1
+                        if number >= 10 { isIncrementing = false }
+                        if number <= 0 { isIncrementing = true }
+                    })
                     .clipShape(.rect(cornerRadius: isTapped ? 0 : 20))
                     .modifier(RoundedRectGradientOverlayModifer())
                     .offset(y: isTapped ? -200 : 0)
@@ -109,7 +118,10 @@ struct ContentView: View {
             
             content
                 .padding(20)
-                .background(.ultraThinMaterial)
+                .background( hasSimpleWave || hasComplexWave ?
+                                AnyView(Color(.secondarySystemBackground)) :
+                                AnyView(Color.clear.background(.regularMaterial))
+                )
                 .modifier(RoundedRectGradientOverlayModifer())
                 .clipShape(.rect(cornerRadius: 20))
                 .padding(40)
@@ -126,17 +138,22 @@ struct ContentView: View {
             
             play
                 .frame(width: isTapped ? 220 : 50)
-                .foregroundStyle(
+                .if(hasPattern) { view in
+                view.foregroundStyle(
                     ShaderLibrary.angledFill(
                         .float(10),
                         .float(10),
                         .color(.blue)
                     )
                 )
+            }
                 .foregroundStyle(.primary, .white)
                 .font(.largeTitle)
                 .padding(20)
-                .background(.ultraThinMaterial)
+                .background( hasSimpleWave || hasComplexWave ?
+                                AnyView(Color(.secondarySystemBackground)) :
+                                AnyView(Color.clear.background(.ultraThinMaterial))
+                )
                 .modifier(RoundedRectGradientOverlayModifer())
                 .clipShape(.rect(cornerRadius: 20))
                 .offset(y: isTapped ? 40 : -44)
