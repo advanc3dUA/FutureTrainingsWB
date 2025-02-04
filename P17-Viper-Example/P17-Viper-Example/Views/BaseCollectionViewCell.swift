@@ -60,4 +60,9 @@ class BaseCollectionViewCell: UICollectionViewCell {
     func configureText(with text: String) {
         self.textLabel.text = text
     }
+    
+    func configureLabels(with model: BaseModel) {
+        self.titleLabel.text = model.title
+        self.textLabel.text = model.description
+    }
 }

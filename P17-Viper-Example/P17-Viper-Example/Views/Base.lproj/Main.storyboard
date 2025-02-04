@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xnm-Mf-1Md">
-                                <rect key="frame" x="24" y="87" width="345" height="702"/>
+                                <rect key="frame" x="24" y="122" width="345" height="667"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sBq-XR-I7K">
                                     <size key="itemSize" width="128" height="128"/>
@@ -37,18 +37,28 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmZ-at-2ZP">
+                                <rect key="frame" x="117" y="73" width="166" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="xnm-Mf-1Md" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="28" id="2eQ-wZ-fGw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xnm-Mf-1Md" secondAttribute="trailing" constant="24" id="O4Y-sA-NxU"/>
+                            <constraint firstItem="vmZ-at-2ZP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="117" id="QTp-Zq-k8k"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="xnm-Mf-1Md" secondAttribute="bottom" constant="29" id="q00-mT-zwV"/>
+                            <constraint firstItem="vmZ-at-2ZP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="14" id="r9N-Af-YTm"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vmZ-at-2ZP" secondAttribute="trailing" constant="110" id="vpV-a5-6XG"/>
                             <constraint firstItem="xnm-Mf-1Md" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="y6o-A4-LXe"/>
+                            <constraint firstItem="xnm-Mf-1Md" firstAttribute="top" secondItem="vmZ-at-2ZP" secondAttribute="bottom" constant="28" id="ypl-v8-LPV"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="xnm-Mf-1Md" id="F9m-sU-MvV"/>
+                        <outlet property="titleLabel" destination="vmZ-at-2ZP" id="tEU-Bd-b3s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

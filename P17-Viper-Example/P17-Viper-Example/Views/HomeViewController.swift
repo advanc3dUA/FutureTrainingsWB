@@ -7,30 +7,36 @@
 
 import UIKit
 
-protocol HomeViewProtocol: AnyObject {
-    
+protocol HomeViewInterface: AnyObject {
+    func setupView()
+    func setTitle(with title: String)
 }
 
 class HomeViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var titleLabel: UILabel!
     private var listConfig = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
-//    var presenter: HomePresenterInterface?
+    var presenter: HomePresenterInterface = HomePresenter(view: nil, router: nil, interactor: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        presenter.notifyViewDidLoad()
     }
 }
 
-extension HomeViewController: HomeViewProtocol, UICollectionViewDelegate {
+extension HomeViewController: HomeViewInterface, UICollectionViewDelegate {
     func setupView() {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(BaseCollectionViewCell.self, forCellWithReuseIdentifier: "baseCell")
         collectionView.setCollectionViewLayout(createLayout(), animated: true)
-        title = "Home"
     }
-    
+    func setTitle(with title: String) {
+        self.titleLabel.text = title
+    }
+}
+
+extension HomeViewController {
     func createLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { index, environment in
             var configuration = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
@@ -44,20 +50,18 @@ extension HomeViewController: HomeViewProtocol, UICollectionViewDelegate {
 
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        presenter.getItemCount
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
+        presenter.getSectionCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "baseCell", for: indexPath) as? BaseCollectionViewCell else {
             return UICollectionViewCell()
         }
-        
-        cell.configureTitle(with: "Hello")
-        cell.configureText(with: "World")
+        cell.configureLabels(with: presenter.getDataByIndex(indexPath.row))
         
         return cell
     }
