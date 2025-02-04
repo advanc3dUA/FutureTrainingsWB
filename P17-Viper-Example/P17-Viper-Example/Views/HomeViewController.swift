@@ -14,13 +14,12 @@ protocol HomeViewInterface: AnyObject {
 
 class HomeViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var titleLabel: UILabel!
     private var listConfig = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
-    var presenter: HomePresenterInterface = HomePresenter(view: nil, router: nil, interactor: nil)
+    var presenter: HomePresenterInterface?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.notifyViewDidLoad()
+        presenter?.notifyViewDidLoad()
     }
 }
 
@@ -32,7 +31,7 @@ extension HomeViewController: HomeViewInterface, UICollectionViewDelegate {
         collectionView.setCollectionViewLayout(createLayout(), animated: true)
     }
     func setTitle(with title: String) {
-        self.titleLabel.text = title
+        self.title = title
     }
 }
 
@@ -50,18 +49,18 @@ extension HomeViewController {
 
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        presenter.getItemCount
+        presenter?.getItemCount ?? 1
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        presenter.getSectionCount
+        presenter?.getSectionCount ?? 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "baseCell", for: indexPath) as? BaseCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.configureLabels(with: presenter.getDataByIndex(indexPath.row))
+        cell.configureLabels(with: presenter?.getDataByIndex(indexPath.row) ?? BaseModel(title: "wrong", description: "wrong"))
         
         return cell
     }
