@@ -14,7 +14,6 @@ protocol HomeViewInterface: AnyObject {
 
 class HomeViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
-    private var listConfig = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
     var presenter: HomePresenterInterface?
     
     override func viewDidLoad() {

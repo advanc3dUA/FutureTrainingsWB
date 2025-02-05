@@ -10,7 +10,7 @@ import Foundation
 protocol HomePresenterInterface: AnyObject {
     func notifyViewDidLoad()
     func getDataByIndex(_ index: Int) -> BaseModel?
-    func fetchDatas()
+    func fetchDatas() // SOLID -> I?
     var getItemCount: Int { get }
     var getSectionCount: Int { get }
     
